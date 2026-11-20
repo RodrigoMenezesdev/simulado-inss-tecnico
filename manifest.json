@@ -1,0 +1,25 @@
+{
+    "name": "Simulado INSS - Técnico do Seguro Social",
+    "short_name": "Simulado INSS",
+    "description": "Simulado completo de Direito Previdenciário para Técnico do Seguro Social com questões aleatórias e feedback imediato.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f1f5f9",
+    "theme_color": "#0f4c81",
+    "orientation": "portrait-primary",
+    "lang": "pt-BR",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

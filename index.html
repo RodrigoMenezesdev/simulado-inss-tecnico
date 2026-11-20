@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f4c81" />
+    <meta name="description"
+        content="Simulado completo de Direito Previdenciário para Técnico do Seguro Social com questões aleatórias e feedback imediato." />
+    <title>Simulado INSS - Técnico do Seguro Social</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="badge-topo">CONCURSO INSS • TÉCNICO DO SEGURO SOCIAL</div>
+            <h1>Simulado Completo de Direito Previdenciário</h1>
+            <p>Baseado nos 8 E-books Esquematizados • Questões Aleatórias • Feedback Imediato</p>
+        </header>
+
+        <!-- TELA DE CONFIGURAÇÃO -->
+        <section id="tela-config" class="card">
+            <h2>Configure seu Simulado</h2>
+
+            <div class="form-group">
+                <label for="select-lei">1. Escolha a Lei / E-book:</label>
+                <select id="select-lei">
+                    <option value="TODAS">Todas as Leis (Simulado Geral Misturado)</option>
+                    <option value="CF88">1. Seguridade Social na Constituição Federal (Arts. 194 a 204)</option>
+                    <option value="LEI8212">2. Lei nº 8.212/1991 (Plano de Custeio)</option>
+                    <option value="LEI8213">3. Lei nº 8.213/1991 (Plano de Benefícios)</option>
+                    <option value="DEC3048">4. Decreto nº 3.048/1999 (Regulamento da Previdência Social)</option>
+                    <option value="LOAS">5. LOAS - Lei nº 8.742/1993 (Assistência Social e BPC)</option>
+                    <option value="IN128">6. Normas Internas (IN 128/2022, Serviço Social e Reabilitação)</option>
+                    <option value="POS2022">7. Atualizações Pós-2022 (ATESTMED, STF e STJ)</option>
+                    <option value="COMPLEMENTARES">8. Temas Complementares (Defeso, Pensões, CRPS e Crimes)</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="select-qtd">2. Quantidade de Questões:</label>
+                    <select id="select-qtd">
+                        <option value="10">10 questões (Rápido)</option>
+                        <option value="20" selected>20 questões (Padrão por Matéria)</option>
+                        <option value="30">30 questões (Intensivo)</option>
+                        <option value="50">50 questões (Maratona)</option>
+                        <option value="MAX">Todas disponíveis no filtro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="check-so-anteriores">3. Filtro Especial:</label>
+                    <label class="checkbox-box">
+                        <input type="checkbox" id="check-so-anteriores" />
+                        <span>Apenas temas que já caíram em provas anteriores</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="info-banco" id="info-disponiveis">
+                Carregando banco de questões...
+            </div>
+
+            <button id="btn-iniciar" class="btn-primary">Iniciar Simulado Aleatório</button>
+        </section>
+
+        <!-- TELA DO SIMULADO -->
+        <section id="tela-quiz" class="card hidden">
+            <div class="quiz-topbar">
+                <span id="progresso-texto" class="tag-progresso">Questão 1 de 20</span>
+                <span id="placar-tempo-real" class="tag-placar">Acertos: 0 | Erros: 0</span>
+                <button id="btn-sair" class="btn-ghost">Trocar Lei</button>
+            </div>
+
+            <div class="progress-bar-bg">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+
+            <div class="meta-tags">
+                <span id="tag-materia" class="badge-materia">Matéria</span>
+                <span id="tag-prova-anterior" class="badge-prova hidden">
+                    📌 Tema cobrado em prova anterior do INSS / Cebraspe
+                </span>
+            </div>
+
+            <div id="enunciado-questao" class="enunciado"></div>
+
+            <div id="lista-alternativas" class="alternativas-container"></div>
+
+            <!-- CAIXA DE FEEDBACK -->
+            <div id="box-feedback" class="feedback-box hidden">
+                <div id="feedback-titulo" class="feedback-titulo"></div>
+                <p id="feedback-texto" class="feedback-texto"></p>
+                <div id="feedback-fundamento" class="feedback-fundamento"></div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="btn-proxima" class="btn-primary hidden">Próxima Questão ➔</button>
+            </div>
+        </section>
+
+        <!-- TELA DE RESULTADO -->
+        <section id="tela-resultado" class="card hidden">
+            <h2>Resultado do Simulado</h2>
+            <div class="resultado-grid">
+                <div class="stat-box">
+                    <span class="stat-num" id="res-total">0</span>
+                    <span class="stat-label">Respondidas</span>
+                </div>
+                <div class="stat-box acerto">
+                    <span class="stat-num" id="res-acertos">0</span>
+                    <span class="stat-label">Acertos</span>
+                </div>
+                <div class="stat-box erro">
+                    <span class="stat-num" id="res-erros">0</span>
+                    <span class="stat-label">Erros</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="res-aproveitamento">0%</span>
+                    <span class="stat-label">Aproveitamento</span>
+                </div>
+            </div>
+
+            <div id="res-mensagem" class="res-mensagem"></div>
+
+            <div class="resultado-acoes">
+                <button id="btn-refazer-erros" class="btn-secondary hidden">Refazer Apenas as que Errei</button>
+                <button id="btn-novo-simulado" class="btn-primary">Novo Simulado</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("./sw.js")
+                    .then(() => console.log("Service Worker registrado com sucesso!"))
+                    .catch((err) => console.error("Erro ao registrar Service Worker:", err));
+            });
+        }
+    </script>
+</body>
+
+</html>
